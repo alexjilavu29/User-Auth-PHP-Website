@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head lang="ro">
+    <meta charset="UTF-8">
+        <meta name="description" content="Astro Productions - Cunoaste artisti noi de pretutindeni">
+        <title>Artistii nostri | ASTRO Productions</title>
+
+        <link rel="shortcut icon" href="./resurse/imagini/favicon.ico" type="image/x-icon"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="./resurse/css/general.css" type="text/css"/>
+        <link rel="stylesheet" href="./resurse/css/hamburger.css" type="text/css"/>
+        <link rel="stylesheet" href="./resurse/css/header.css" type="text/css"/>
+    <style>
+      /* add styles for the body */
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      /* add styles for the artist container */
+      .artist-container {
+        display: flex;
+        align-items: center;
+        margin: 20px;
+      }
+      /* add styles for the artist image */
+      .artist-image {
+        width: 150px;
+        height: 150px;
+        margin-right: 20px;
+      }
+      /* add styles for the artist name and description */
+      .artist-name, .artist-description {
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <header>
+    <a href="index.html">
+    <img src="./resurse/imagini/image.png" class="header-img">
+</a>
+    <h1 class="header-titlu"> ASTRO PRODUCTIONS</h1>
+</header>
+<nav >
+    <label id="hamburger" for="ch-menu" >
+        <img src="resurse/imagini/Hamburger_icon_alb.png" alt="menu">
+    </label>
+    <input id="ch-menu" type="checkbox">
+    <ul class="meniu">
+        <li><a href="index.html">
+            Acasa
+        </a></li>
+        <li><a href="inregistrare.html">Inregistrare</a></li>
+        <li>
+            <div><a href="despre.html">Despre</a></div>
+            <ul>
+                <li>Prezentare</li>
+                <li>Istoric</li>
+                <li>Motivatie</li>
+            </ul>
+        </li>
+        <li><a href="artisti.html">
+            Artiștii noștri</a>
+        </li>
+        <li>Abonează-te la Newsletter!</li>
+    </ul>
+    <a href="inregistrare.html">
+        <img src="resurse/imagini/login2.png" class="login-img"></a>
+</nav>
+  <main>
+    <div class="artist-container">
+      <img src="artist1.jpg" class="artist-image" alt="artist 1">
+      <div>
+        <h2 class="artist-name">Artist 1</h2>
+        <p class="artist-description">Artistul 1 este un cântăreț și compozitor talentat care a cucerit inimile publicului cu muzica sa hip hop și R&B. El a lansat mai multe albume de succes și a colaborat cu nume mari
+             din industria muzicală. Performanțele sale live sunt cunoscute pentru energia și pasiunea cu care el se dedică publicului său.</p>
+      </div>
+    </div>
+    <div class="artist-container">
+      <img src="artist2.jpg" class="artist-image" alt="artist 2">
+      <div>
+        <h2 class="artist-name">Artist 2</h2>
+        <p class="artist-description">Artistul Y este una dintre cele mai apreciate voci din scena muzicală românească. Ea a câștigat numeroase premii pentru interpretarea sa excepțională și a colaborat cu artiști renumiți din țară și străinătate. 
+            Muzica sa este un amestec de pop, folk și jazz, care reflectă influențele sale diverse. Ea este cunoscută pentru conexiunea sa puternică cu publicul său și pentru mesajele pozitive din cântecele sale."
+            Please note that this is just an example, artistic names and specific musical genre may vary, you can use them as a reference and adapt them as you see fit.</p>
+      </div>
+    </div>
+    <!-- add more artist container divs as needed -->
+</main>
+  <footer>
+    <p>Copyright © 2021 ASTRO Productions</p>
+  </footer>
