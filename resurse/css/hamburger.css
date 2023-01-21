@@ -1,0 +1,92 @@
+/* Hamburger Menu Styles */
+#hamburger {
+    display: none;
+    float: right;
+    padding: 10px;
+}
+
+#hamburger img {
+    width: 30px; /* adjust this value to your desired size */
+    height: auto;
+
+    
+}
+
+nav input:checked ~ #hamburger {
+    display: none;
+}
+
+
+
+nav input:checked ~ ul.meniu {
+    display: block;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    #hamburger {
+        display: flex;
+        justify-content: center;
+    }
+    
+    nav ul.meniu {
+        display: none;
+        position: absolute;
+        text-align: center;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        
+    }
+    nav ul.meniu>li{
+        float:left;
+        width:100px;
+        position:relative;
+        
+    }
+    /* nav input:not(:checked) ~ ul.meniu {
+        display: none;
+    } */
+}
+
+@media only screen and (min-width: 769px) {
+    #hamburger {
+        display: block;
+    }
+    nav ul.meniu {
+        display: none;
+        position: absolute;
+        text-align: center;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        
+    }
+    nav ul.meniu>li{
+        float:left;
+        width:200px;
+        position:relative;
+        padding: 0;
+    }
+    nav input:not(:checked) ~ ul.meniu {
+        display: none;
+    }
+} 
+
+/* Hide the submenus by default */
+.meniu ul {
+    display: none;
+}
+
+/* Show the submenus when the parent menu item is hovered over */
+.meniu li:hover ul {
+    display: block;
+}
+
+/* Add a transition to the submenus */
+.meniu ul {
+    transition: max-height 10s ease-out;
+}
