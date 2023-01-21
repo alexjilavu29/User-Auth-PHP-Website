@@ -1,112 +1,59 @@
 <!DOCTYPE html>
 <html lang="ro">
     <head>
-      <title>Astro Productions</title>
-
-
+        <title>Astro Productions</title>    
         <meta charset="UTF-8">
         <meta name="description" content="Astro Productions - Cunoaste artisti noi de pretutindeni">
-        <link rel="shortcut icon" href="./resurse/imagini/favicon.ico" type="image/x-icon"/>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="../../../../../resurse/imagini/favicon.ico" type="image/x-icon"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="../../../../../resurse/imagini/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../../../../resurse/imagini/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../../../../resurse/imagini/favicon-16x16.png">
+        <link rel="manifest" href="../../../../../resurse/imagini/site.webmanifest">
+        <link rel="mask-icon" href="../../../../../resurse/imagini/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="stylesheet" href="./resurse/css/general.css" type="text/css"/>
-        <link rel="stylesheet" href="./resurse/css/hamburger.css" type="text/css"/>
-        <link rel="stylesheet" href="./resurse/css/header.css" type="text/css"/>
-
-
-
-
-        <style>
-            /* add styles for the body */
-            body {
-              background-color: #f2f2f2;
-              font-family: Arial, sans-serif;
-              margin: 0;
-              padding: 0;
-            }
-            /* add styles for the active users container */
-            .active-users {
-              background-color: #4CAF50;
-              color: #ffffff;
-              padding: 20px;
-              text-align: center;
-            }
-            /* add styles for the top artists container */
-            .top-artists {
-              display: flex;
-              flex-wrap: wrap;
-              margin: 20px;
-            }
-            /* add styles for the top artist container */
-            .top-artist {
-              width: 30%;
-              margin: 10px;
-            }
-            /* add styles for the top artist image */
-            .top-artist-image {
-              width: 100%;
-            }
-            /* add styles for the gallery container */
-            .gallery {
-              display: flex;
-              flex-wrap: wrap;
-              margin: 20px;
-            }
-            /* add styles for the gallery image */
-            .gallery-image {
-              width: 30%;
-              margin: 10px;
-            }
-          </style>
-
-
+        <link rel="stylesheet" href="../../../../../resurse/css/general.css" type="text/css"/>
+        <link rel="stylesheet" href="../../../../../resurse/css/hamburger.css" type="text/css"/>
+        <link rel="stylesheet" href="../../../../../resurse/css/header.css" type="text/css"/>
+        <link rel="stylesheet" href="../../../../../resurse/css/inregistrare.css" type="text/css"/>
 
     </head>
-    
     <body>
-       
-       
-        <header>
-            <a href="index.html">
-            <img src="./resurse/imagini/image.png" class="header-img">
+    <header>
+            <a href="../../../../../index.php">
+            <img src="../../../../../resurse/imagini/image.png" class="header-img">
         </a>
             <h1 class="header-titlu"> ASTRO PRODUCTIONS</h1>
         </header>
         <nav >
             <label id="hamburger" for="ch-menu" >
-                <img src="resurse/imagini/Hamburger_icon_alb.png" alt="menu">
+                <img src="../../../../resurse/imagini/Hamburger_icon_alb.png" alt="menu">
             </label>
             <input id="ch-menu" type="checkbox">
             <ul class="meniu">
-                <li><a href="index.html">
+                <li><a href="../../../../../index.php">
                     Acasa
                 </a></li>
-                <li><a href="inregistrare.html">Inregistrare</a></li>
+                <li><a href="../../../../../views/pagini/inregistrare.php">Inregistrare</a></li>
                 <li>
-                    <div><a href="despre.html">Despre</a></div>
+                    <div><a href="../../../../../views/pagini/despre.php">Despre</a></div>
                     <ul>
                         <li>Prezentare</li>
                         <li>Istoric</li>
                         <li>Motivatie</li>
                     </ul>
                 </li>
-                <li><a href="artisti.html">
+                <li><a href="../../../../../views/pagini/artisti.php">
                     Artiștii noștri</a>
                 </li>
                 <li>Abonează-te la Newsletter!</li>
             </ul>
-            <a href="inregistrare.html">
-                <img src="resurse/imagini/login2.png" class="login-img"></a>
+            <a href="../../../../../views/pagini/inregistrare.php">
+                <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
         </nav>
-        
-        <main>
-            <h1>Bine ati venit la firma noastra de productie muzicala</h1>
+                <main>
+        <h1>Bine ati venit la firma noastra de productie muzicala</h1>
             <div class="active-users">
                 <h2>Numarul de utilizatori activi: <?php echo $active_users_count; ?></h2>
               </div>
@@ -164,4 +111,4 @@
           <footer>
             <p>Copyright © 2021 ASTRO Productions</p>
           </footer>
-</html>
+          </html>
