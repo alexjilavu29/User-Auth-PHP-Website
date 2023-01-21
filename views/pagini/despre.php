@@ -1,47 +1,7 @@
-<?php
-require_once('../../resurse/phpmailer/class.phpmailer.php');
-if (isset($_POST["inregistrare"])) {
-    $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
-    if (mysqli_connect_errno()) {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        exit();
-    }
-    $insert_user = "INSERT INTO users (username,email, password) VALUES ('" . $_POST["username"] . "','" . $_POST["email"] . "','" . $_POST["password"] . "')";
-    echo $insert_user;
-    mysqli_query($con, $insert_user);
-    mysqli_close($con);
-
-
-    $mail = new PHPMailer(true);
-
-    $mail->IsSMTP();
-    $mail->SMTPDebug = 2;
-    try {
-        $gmail_password = "zmulvuerrnvsjths";
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = "ssl";
-        $mail->Host = "smtp.gmail.com";
-        $mail->Port = 465;
-        $mail->Username = 'astro.productions.off@gmail.com'; // GMAIL username
-        $mail->Password = $gmail_password; // GMAIL password
-        $mail->SetFrom('astro.productions.off@gmail.com', 'ASTRO Productions');
-        $mail->AddReplyTo($_POST["email"], $_POST["username"]);
-        $mail->AddAddress($_POST["email"], $_POST["username"]);
-        $mail->isHTML(true);
-        $mail->Subject = "VERIFICARE MAIL || ASTRO Productions";
-        $mail->Body = "DATI CLICK AICI: ";
-        $mail->send();
-
-    } catch (Exception $e) {
-        echo $e->getMessage();
-    }
-}
-    ?>
-
 <!DOCTYPE html>
 <html lang="ro">
     <head>
-        <title>Inregistrare Client | ASTRO Productions</title>
+        <title>Astro Productions</title>
         <meta charset="UTF-8">
         <meta name="description" content="Astro Productions - Cunoaste artisti noi de pretutindeni">
         <link rel="shortcut icon" href="../../../../../resurse/imagini/favicon.ico" type="image/x-icon"/>
@@ -57,11 +17,12 @@ if (isset($_POST["inregistrare"])) {
         <link rel="stylesheet" href="../../../../../resurse/css/hamburger.css" type="text/css"/>
         <link rel="stylesheet" href="../../../../../resurse/css/header.css" type="text/css"/>
         <link rel="stylesheet" href="../../../../../resurse/css/inregistrare.css" type="text/css"/>
-        </head>
+          </head>
+    
     <body>
-        
-        
-
+       
+       
+    
     <header>
             <a href="../../../../../index.php">
             <img src="../../../../../resurse/imagini/image.png" class="header-img">
@@ -93,44 +54,56 @@ if (isset($_POST["inregistrare"])) {
             </ul>
             <a href="../../../../../views/pagini/inregistrare.php">
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
-        </nav>
-        
-        
+        </nav>  
         <main>
-        <style>#email
-        {
-            width: 100%;
-            padding: 12px 20px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            border: 2px solid rgb(39, 39, 39);
-            border-radius: 2px;
-        }
-  </style>
-          
-          <body>
-            <form action="inregistrare.php" method="post">
-                <label for="username">Nume de utilizator:</label>
-                <input type="text" id="username" name="username">
-                <br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
-                <br>
-                <label for="password">Parolă:</label>
-                <input type="password" id="password" name="password">
-                <br><br>
-                <input type="submit" name="inregistrare" value="Intră în cont">
-                
-              </form>
-              <br>
-              <!-- <form action="/signup" method="post">
-                <input type="button" value="Nu sunteți înregistrat?" onclick="location.href='/signup';">
-              </form> -->
-          </body>
+            <section id="despre">
+              <h2>Despre ASTRO Productions</h2>
+              <p>Suntem o companie de producție muzicală care se specializează în crearea de muzică de înaltă calitate pentru o varietate de medii. Indiferent dacă căutați un coloana sonoră personalizată pentru filmul sau jocul video dvs., sau un sunet unic și profesionist pentru podcast-ul sau canalul YouTube, vă acoperim.</p>
+            </section>
+            <section id="servicii">
+              <h2>Serviciile noastre</h2>
+              <ul>
+                <li>Crearea coloanei sonore personalizate</li>
+                <li>Producție muzicală</li>
+                <li>Design sonor</li>
+                <li>Mixaj și mastering</li>
+              </ul>
+            </section>
+            <section id="portofoliu">
+              <h2>Portofoliul nostru</h2>
+              <ul>
+                <li>Partitură pentru filmul "Marea aventură"</li>
+                <li>Coloană sonoră pentru jocul video "Escape the City"</li>
+                <li>Muzică de intro pentru podcast-ul "The Daily Brief"</li>
+                <li>Tema canalului YouTube pentru "Cooking with Karen"</li>
+              </ul>
+            </section>
+            <section id="contact">
+                <h2>Contactați-ne</h2>
+                <p>Email: contact@astroproductions.com</p>
+                <p>Telefon: 555-555-5555</p>
+                <p>Adresa: Str. Principala 123, Etaj 456, Orasul X 0000</p>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+              </section>
           </main>
-          
           <footer>
             <p>Copyright © 2021 ASTRO Productions</p>
           </footer>
-
 </html>
