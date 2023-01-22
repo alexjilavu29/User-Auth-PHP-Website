@@ -1,7 +1,7 @@
 <?php
 require_once('../../resurse/phpmailer/class.phpmailer.php');
 require_once ('../../recaptcha-master/src/autoload.php');
-if (isset($_POST["inregistrare"])) {
+if (isset($_POST["newsletter"])) {
     $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -14,51 +14,54 @@ if (isset($_POST["inregistrare"])) {
       
         
     $select = mysqli_query($con, "SELECT * FROM users WHERE email = '".$_POST['email']."'");
-    if(mysqli_num_rows($select)) {
-    exit('Email-ul este deja folosit!');
+    $row = mysqli_fetch_assoc($select);
+    if ($row['newsletter'] != 1) {
+        if (mysqli_num_rows($select)) {
+            $insert_news = "UPDATE users SET newsletter = 1 WHERE email = '" . $_POST['email'] . "'";
+            mysqli_query($con, $insert_news);
+
+            $mail = new PHPMailer(true);
+            $mail->IsSMTP();
+            $mail->SMTPDebug = 2;
+            try {
+                $row = mysqli_fetch_assoc($select);
+                $gmail_password = "zmulvuerrnvsjths";
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = "ssl";
+                $mail->Host = "smtp.gmail.com";
+                $mail->Port = 465;
+                $mail->Username = 'astro.productions.off@gmail.com';
+                $mail->Password = $gmail_password;
+                $mail->SetFrom('astro.productions.off@gmail.com', 'ASTRO Productions');
+                $mail->AddReplyTo($_POST["email"], $row["username"]);
+                $mail->AddAddress($_POST["email"], $row["username"]);
+                $mail->isHTML(true);
+                $mail->Subject = "Newsletter || ASTRO Productions";
+                $mail->Body = " Vă mulțumim că v-ați abonat la newsletter-ul nostru, '" . $row['username'] . "'! <br><br>
+            Ne bucurăm să vă ținem la curent cu cele mai noi actualizări și noutăți din lumea muzicii.
+            <br><br>
+            În ultima perioadă, am lansat albume noi de la artiștii noștri de top, iar acestea au primit recenzii excelente din partea criticilor de muzică. De asemenea, am organizat concerte live online, și am anunțat turnee viitoare pentru acești artiști.
+            <br>
+            În plus, am lansat un nou program de mentorship pentru tinerii artiști, care le oferă oportunități de a colabora cu artiștii noștri consacrați și de a-și dezvolta abilitățile muzicale.
+            <br><br>
+            Nu pierdeți următoarele actualizări și noutăți, asigurați-vă că vă verificați adresa de e-mail și urmăriți-ne pe Instagram la @astro_productions.
+            <br><br>
+            Vă mulțumim din nou pentru susținerea dvs. continuă,<br>
+            Alexandru Jilavu,<br>
+            Manager ASTRO Productions<br> ";
+                $mail->send();
+
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+        }
+    }
+    else
+    {
+        echo "Sunteti deja abonat la newsletter!";
     }
 
-    $select = mysqli_query($con, "SELECT * FROM users WHERE username = '".$_POST['username']."'");
-    if(mysqli_num_rows($select)) {
-    exit('Numele de utilizator este deja folosit!');
-    }
-
-    $insert_user = "INSERT INTO users (username,email, password) VALUES ('" . $_POST["username"] . "','" . $_POST["email"] . "','" . $_POST["password"] . "')";
-    echo $insert_user;
-    mysqli_query($con, $insert_user);
-    mysqli_close($con);
-
-    
-
-
-
-
-    $mail = new PHPMailer(true);
-
-    $mail->IsSMTP();
-    $mail->SMTPDebug = 2;
-    try {
-        $gmail_password = "zmulvuerrnvsjths";
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = "ssl";
-        $mail->Host = "smtp.gmail.com";
-        $mail->Port = 465;
-        $mail->Username = 'astro.productions.off@gmail.com'; 
-        $mail->Password = $gmail_password; 
-        $mail->SetFrom('astro.productions.off@gmail.com', 'ASTRO Productions');
-        $mail->AddReplyTo($_POST["email"], $_POST["username"]);
-        $mail->AddAddress($_POST["email"], $_POST["username"]);
-        $mail->isHTML(true);
-        $mail->Subject = "VERIFICARE MAIL || ASTRO Productions";
-        $mail->Body = "DATI CLICK AICI: ";
-        $mail->send();
-
-    } catch (Exception $e) {
-        echo $e->getMessage();
-    }
 }
-
-
 
     ?>
 
@@ -127,6 +130,7 @@ if (isset($_POST["inregistrare"])) {
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
         </nav>
         
+        
         <main>
         <style>#email
         {
@@ -156,25 +160,18 @@ if (isset($_POST["inregistrare"])) {
   </style>
           
           <body>
-            <form action="inregistrare.php" method="post">
-                <label for="username">Nume de utilizator:</label>
-                <input type="text" id="username" name="username" required>
+            <form action="newsletter.php" method="post">
                 <br>
-                <label for="email">Email:</label>
+                <label for="email">Introduceți mail-ul personal:</label>
                 <input type="email" id="email" name="email" required>
                 <br>
-                <label for="password">Parolă:</label>
-                <input type="password" id="password" name="password" required>
                 <br><br>
                 <!-- <div class="g-recaptcha" data-sitekey="6LfqxRkkAAAAABQO7Bn4_crxi0sXPHGFX4lsU_Fy"></div>
                 <br> -->
-                <input type="submit" name="inregistrare" value="Autentifică-mă">
+                <input type="submit" name="newsletter" value="Abonează-mă">
               </form>
               <br><br>
-        
-           <a href="../../../../../views/pagini/login.php" id="button">
-            Aveți deja cont?</a>
-              <br>
+
     
             
           </body>

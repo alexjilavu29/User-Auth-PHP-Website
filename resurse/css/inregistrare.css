@@ -17,6 +17,9 @@ body {
     display: block;
     margin-bottom: 10px;
   }
+  
+  
+
 
   input[type="text"], input[type="password"] {
     width: 100%;
@@ -39,20 +42,10 @@ body {
     font-size: 18px;
   }
 
+
   input[type="submit"]:hover {
     background-color: #5fd2f1;
   }
 
- 
-  /* add styles for the signup button */
-  input[type="button"] {
-    background-color: #337ab7;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 14px 20px;
-    width: 100%;
-  }
-  input[type="button"]:hover {
-    background-color: #34a7c4;
-  }
+
+  

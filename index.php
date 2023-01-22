@@ -1,3 +1,20 @@
+<?php
+                $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
+
+                if (mysqli_connect_errno()) {
+                  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                  exit();
+              }
+
+                $sql = "SELECT COUNT(*) as count FROM users WHERE logged_in = 1";
+
+                $result = mysqli_query($con, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $active_users = $row['count'];
+
+                mysqli_close($con);
+            ?>
+
 <!DOCTYPE html>
 <html lang="ro">
     <head>
@@ -21,6 +38,7 @@
     </head>
     <body>
     <header>
+    <?php session_start(); ?>
             <a href="../../../../../index.php">
             <img src="../../../../../resurse/imagini/image.png" class="header-img">
         </a>
@@ -35,19 +53,26 @@
                 <li><a href="../../../../../index.php">
                     Acasa
                 </a></li>
+
+
+
+                
+              <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1): ?>
+                <li><a href="../../../../../views/pagini/profil.php">Profil</a></li>
+              <?php else: ?>
                 <li><a href="../../../../../views/pagini/inregistrare.php">Inregistrare</a></li>
+              <?php endif; ?>
+            
+                
+
+
                 <li>
-                    <div><a href="../../../../../views/pagini/despre.php">Despre</a></div>
-                    <ul>
-                        <li>Prezentare</li>
-                        <li>Istoric</li>
-                        <li>Motivatie</li>
-                    </ul>
+                    <a href="../../../../../views/pagini/despre.php">Despre</a>
                 </li>
                 <li><a href="../../../../../views/pagini/artisti.php">
                     Artiștii noștri</a>
                 </li>
-                <li>Abonează-te la Newsletter!</li>
+                <li><a href="../../../../../views/pagini/newsletter.php">Abonează-te la Newsletter!</a></li>
             </ul>
             <a href="../../../../../views/pagini/inregistrare.php">
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
@@ -55,58 +80,48 @@
                 <main>
         <h1>Bine ati venit la firma noastra de productie muzicala</h1>
             <div class="active-users">
-                <h2>Numarul de utilizatori activi: <?php echo $active_users_count; ?></h2>
+                <h2>Numarul de utilizatori activi: <?php echo $active_users; ?></h2>
               </div>
+              <br>
+              <br>
+              <h2> Cei mai vechi artisti ai nostri: </h2>
             <div class="top-artists">
-              <div class="top-artist">
-                <img src="artist1.jpg" class="top-artist-image" alt="artist 1">
-                <h3>Artist 1</h3>
-              </div>
-              <div class="top-artist">
-                <img src="artist2.jpg" class="top-artist-image" alt="artist 2">
-                <h3>Artist 2</h3>
-              </div>
-              <div class="top-artist">
-                <img src="artist3.jpg" class="top-artist-image" alt="artist 3">
-                <h3>Artist 3</h3>
-              </div>
-              <div class="top-artist">
-                <img src="artist4.jpg" class="top-artist-image" alt="artist 4">
-                <h3>Artist 4</h3>
-              </div>
-              <div class="top-artist">
-                <img src="artist5.jpg" class="top-artist-image" alt="artist 5">
-                <h3>Artist 5</h3>
-              </div>
+            <?php 
+      $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
+      if (mysqli_connect_errno()) {
+          echo "Failed to connect to MySQL: " . mysqli_connect_error();
+          exit();}
+          $cerere_artist="SELECT * FROM artisti";
+          $rezultat_artist= mysqli_query($con, $cerere_artist);
+          if (mysqli_num_rows($rezultat_artist) > 0){
+              $i = 0;
+      while ($row_artist = mysqli_fetch_assoc($rezultat_artist)) 
+      {
+                $i++;
+        echo "<div class='artist-container'>
+       <div>
+         <h2 class='artist-name'>".$row_artist["nume"]."  -- ".$row_artist["gen_muzical"]."  -> ".$row_artist["urmaritori"]." urmaritori</h2>
+         <p class='artist-description'>".$row_artist["descriere"]."</p>
+         <br>
+       </div>
+     </div>";
+
+                if ($i == 5)
+                  break;
+      }
+          }
+          else
+          {
+      echo "Nu exista artisti.";
+          }
+    
+    ?>
             </div>
-            <div class="gallery">
-              <img src="image1.jpg" class="gallery-image" alt="image 1">
-              <img src="image2.jpg" class="gallery-image" alt="image 2">
-              <img src="image3.jpg" class="gallery-image" alt="image 3">
-              <img src="image4.jpg" class="gallery-image" alt="image 4">
-              <img src="image5.jpg" class="gallery-image" alt="image 5">
-            </div>
+            
             <div class="description">
               <p>Firma noastra de productie muzicala este dedicata descoperirii si promovarii artistilor talentati. Lucram cu o varietate de genuri muzicale si colaboram cu artisti din intreaga lume pentru a crea muzica de calitate. Va invitam sa navigati pe site-ul nostru pentru a afla mai multe despre artistii si proiectele noastre.</p>
             </div>
-            <?php
-                // Connect to the database
-                $conn = mysqli_connect("host", "username", "password", "database_name");
-
-                // Check connection
-                if (!$conn) {
-                    die("Connection failed: " . mysqli_connect_error());
-                }
-
-                // Get the active users count from the database
-                $sql = "SELECT COUNT(*) as count FROM users WHERE active = 1";
-                $result = mysqli_query($conn, $sql);
-                $row = mysqli_fetch_assoc($result);
-                $active_users_count = $row['count'];
-
-                // Close the connection
-                mysqli_close($conn);
-            ?>
+            
           </main>
           <footer>
             <p>Copyright © 2021 ASTRO Productions</p>
