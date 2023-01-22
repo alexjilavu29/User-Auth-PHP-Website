@@ -49,8 +49,8 @@ if (isset($_POST["inregistrare"])) {
         $mail->AddReplyTo($_POST["email"], $_POST["username"]);
         $mail->AddAddress($_POST["email"], $_POST["username"]);
         $mail->isHTML(true);
-        $mail->Subject = "VERIFICARE MAIL || ASTRO Productions";
-        $mail->Body = "DATI CLICK AICI: ";
+        $mail->Subject = "INREGISTRARE || ASTRO Productions";
+        $mail->Body = "Va multumim pentru inregistrarea contului la firma noastra. Speram sa va bucurati de muzica la fel ca si noi! ";
         $mail->send();
 
     } catch (Exception $e) {
