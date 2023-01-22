@@ -7,10 +7,10 @@ if (isset($_POST["newsletter"])) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit();
     }
-    // if (empty($_POST['g-recaptcha-response'])){
-    //     echo "Te rugam sa rezolvi captcha-ul";
-    //     exit();
-    //   }
+    if (empty($_POST['g-recaptcha-response'])){
+        echo "Te rugam sa rezolvi captcha-ul";
+        exit();
+       }
       
         
     $select = mysqli_query($con, "SELECT * FROM users WHERE email = '".$_POST['email']."'");
@@ -166,8 +166,8 @@ if (isset($_POST["newsletter"])) {
                 <input type="email" id="email" name="email" required>
                 <br>
                 <br><br>
-                <!-- <div class="g-recaptcha" data-sitekey="6LfqxRkkAAAAABQO7Bn4_crxi0sXPHGFX4lsU_Fy"></div>
-                <br> -->
+                 <div class="g-recaptcha" data-sitekey="6LfqxRkkAAAAABQO7Bn4_crxi0sXPHGFX4lsU_Fy"></div>
+                <br> 
                 <input type="submit" name="newsletter" value="Abonează-mă">
               </form>
               <br><br>
