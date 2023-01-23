@@ -7,5 +7,5 @@
 # ------------------------
 # Mai jos se află structura bazei de date aferente site-ului, cu cheile primare și condițiile necesare.
 Tabela users este formata din:  idUser (cheie primara, autoincrement,not null), username (not null), password (not null), email, newsletter BINARY, logged_in BINARY, rol DEFAULT client
-# ------------------------
+#
 Tabela artisti este formata din: idArtist (cheie primara, autoincrement, not null), nume (not null), gen_muzical (not null), descriere, urmaritori
