@@ -60,7 +60,13 @@
                 </li>
                 <li><a href="../../../../../views/pagini/newsletter.php">Abonează-te la Newsletter!</a></li>
             </ul>
-            <a href="../../../../../views/pagini/inregistrare.php">
+           <a 
+             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1): ?>
+                href="../../../../../views/pagini/profil.php"
+              <?php else: ?>
+                href="../../../../../views/pagini/inregistrare.php"
+              <?php endif; ?>
+            >
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
         </nav>
         <main>
@@ -74,6 +80,9 @@
                 <li>Nume de utilizator:  <?php  echo $_SESSION['username']?></li>
                 <li>Parolă: <?php echo $_SESSION['password']?></li>
                 <li>Email: <?php echo $_SESSION['email']?></li>
+                <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1 && $_SESSION['rol']=='admin'):?>
+                <li>Sunteti inregistrat ca si administrator!</li>
+<?php endif; ?>
               </ul>
             <br>
             <h2> Doriti sa iesiti din contul dumneavoastra? </h2>
