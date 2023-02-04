@@ -1,3 +1,38 @@
+<?php
+require_once('../../resurse/phpmailer/class.phpmailer.php');
+require_once ('../../recaptcha-master/src/autoload.php');
+if (isset($_POST["despre"])) {
+    $con = mysqli_connect("localhost", "astro_user", "VuEpEARll3ReG", "astro_proiectdaw", "3306");
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        exit();
+    }
+
+            $mail = new PHPMailer(true);
+            $mail->IsSMTP();
+            $mail->SMTPDebug = 2;
+            try {
+                $gmail_password = "zmulvuerrnvsjths";
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = "ssl";
+                $mail->Host = "smtp.gmail.com";
+                $mail->Port = 465;
+                $mail->Username = 'astro.productions.off@gmail.com';
+                $mail->Password = $gmail_password;
+                $mail->SetFrom($_POST["email"], $_POST["nume"]);
+                
+                $mail->AddAddress('astro.productions.off@gmail.com', 'ASTRO Productions');
+                $mail->isHTML(true);
+                $mail->Subject = $_POST["subiect"];
+                $mail->Body = $_POST["mesaj"];
+                $mail->send();
+
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+}
+
+    ?>
 <!DOCTYPE html>
 <html lang="ro">
     <head>
@@ -60,15 +95,32 @@
                 </li>
                 <li><a href="../../../../../views/pagini/newsletter.php">Abonează-te la Newsletter!</a></li>
             </ul>
-            <a href="../../../../../views/pagini/inregistrare.php">
+           <a 
+             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1): ?>
+                href="../../../../../views/pagini/profil.php"
+              <?php else: ?>
+                href="../../../../../views/pagini/inregistrare.php"
+              <?php endif; ?>
+            >
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
         </nav>
         <main>
-            <section id="despre">
+            <style>#email
+        {
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 2px solid rgb(39, 39, 39);
+            border-radius: 2px;
+        }</style>
+        <div style="display:flex;">
+             <div style="width:50%; float:left;">
+
+                <br>
               <h2>Despre ASTRO Productions</h2>
               <p>Suntem o companie de producție muzicală care se specializează în crearea de muzică de înaltă calitate pentru o varietate de medii. Indiferent dacă căutați un coloana sonoră personalizată pentru filmul sau jocul video dvs., sau un sunet unic și profesionist pentru podcast-ul sau canalul YouTube, vă acoperim.</p>
-            </section>
-            <section id="servicii">
+
               <h2>Serviciile noastre</h2>
               <ul>
                 <li>Crearea coloanei sonore personalizate</li>
@@ -76,8 +128,8 @@
                 <li>Design sonor</li>
                 <li>Mixaj și mastering</li>
               </ul>
-            </section>
-            <section id="portofoliu">
+
+
               <h2>Portofoliul nostru</h2>
               <ul>
                 <li>Partitură pentru filmul "Marea aventură"</li>
@@ -85,31 +137,35 @@
                 <li>Muzică de intro pentru podcast-ul "The Daily Brief"</li>
                 <li>Tema canalului YouTube pentru "Cooking with Karen"</li>
               </ul>
-            </section>
-            <section id="contact">
-                <h2>Contactați-ne</h2>
-                <p>Email: contact@astroproductions.com</p>
-                <p>Telefon: 555-555-5555</p>
-                <p>Adresa: Str. Principala 123, Etaj 456, Orasul X 0000</p>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-              </section>
+
+            </div>
+             <div style="width:50%; float:left;">
+
+                <h2 style="text-align: center;">Contactați-ne!</h2>
+                <br>
+                <form action="despre.php" method="post">
+                <br>
+                
+                <label for="nume">Nume:</label>
+                <input type="text" id="nume" name="nume" required>
+                <br>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <label for="subiect">Subiect:</label>
+                <input type="text" id="subiect" name="subiect" required>
+                <br>
+                <label for="mesaj">Mesaj:</label>
+                 <textarea id="mesaj" name="mesaj"></textarea>
+                <br><br>
+                <br> 
+                <input type="submit" name="despre" value="Trimite-ne un mesaj!">
+              </form>
+              </div>
+              
+
+              
           </main>
           <footer>
             <p>Copyright © 2021 ASTRO Productions</p>

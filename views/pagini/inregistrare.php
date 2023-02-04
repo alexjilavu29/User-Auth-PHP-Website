@@ -2,13 +2,13 @@
 require_once('../../resurse/phpmailer/class.phpmailer.php');
 require_once ('../../recaptcha-master/src/autoload.php');
 if (isset($_POST["inregistrare"])) {
-    $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
+    $con = mysqli_connect("localhost", "astro_user", "VuEpEARll3ReG", "astro_proiectdaw", "3306");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit();
     }
     if (empty($_POST['g-recaptcha-response'])){
-        echo "Te rugam sa rezolvi captcha-ul";
+         echo "Te rugam sa rezolvi captcha-ul";
          exit();
        }
       
@@ -52,10 +52,13 @@ if (isset($_POST["inregistrare"])) {
         $mail->Subject = "INREGISTRARE || ASTRO Productions";
         $mail->Body = "Va multumim pentru inregistrarea contului la firma noastra. Speram sa va bucurati de muzica la fel ca si noi! ";
         $mail->send();
-
+        header("Location: ../../../views/pagini/login.php");
     } catch (Exception $e) {
         echo $e->getMessage();
     }
+    
+    
+     
 }
 
 
@@ -123,7 +126,13 @@ if (isset($_POST["inregistrare"])) {
                 </li>
                 <li><a href="../../../../../views/pagini/newsletter.php">Abonează-te la Newsletter!</a></li>
             </ul>
-            <a href="../../../../../views/pagini/inregistrare.php">
+            <a 
+             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1): ?>
+                href="../../../../../views/pagini/profil.php"
+              <?php else: ?>
+                href="../../../../../views/pagini/inregistrare.php"
+              <?php endif; ?>
+            >
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
         </nav>
         
@@ -165,7 +174,7 @@ if (isset($_POST["inregistrare"])) {
                 <br>
                 <label for="password">Parolă:</label>
                 <input type="password" id="password" name="password" required>
-                <br><br>
+                <br>
                  <div class="g-recaptcha" data-sitekey="6LfqxRkkAAAAABQO7Bn4_crxi0sXPHGFX4lsU_Fy"></div>
                 <br> 
                 <input type="submit" name="inregistrare" value="Autentifică-mă">

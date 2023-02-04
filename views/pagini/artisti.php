@@ -97,12 +97,18 @@
                 </li>
                 <li><a href="../../../../../views/pagini/newsletter.php">Abonează-te la Newsletter!</a></li>
             </ul>
-            <a href="../../../../../views/pagini/inregistrare.php">
+            <a 
+             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1): ?>
+                href="../../../../../views/pagini/profil.php"
+              <?php else: ?>
+                href="../../../../../views/pagini/inregistrare.php"
+              <?php endif; ?>
+            >
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
         </nav>
   <main>
     <?php 
-      $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
+      $con = mysqli_connect("localhost", "astro_user", "VuEpEARll3ReG", "astro_proiectdaw", "3306");
       if (mysqli_connect_errno()) {
           echo "Failed to connect to MySQL: " . mysqli_connect_error();
           exit();}

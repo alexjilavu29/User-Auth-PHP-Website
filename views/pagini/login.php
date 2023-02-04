@@ -5,7 +5,7 @@ require_once('../../resurse/phpmailer/class.phpmailer.php');
 require_once ('../../recaptcha-master/src/autoload.php');
 if (isset($_POST["login"])) {
     
-    $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
+    $con = mysqli_connect("localhost", "astro_user", "VuEpEARll3ReG", "astro_proiectdaw", "3306");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit();
@@ -35,8 +35,14 @@ if (isset($_POST["login"])) {
             $_SESSION['idUser'] = $row['idUser'];
             //echo $_SESSION['idUser'];
             $_SESSION['logged_in'] = 1;
+            $insert_login = "UPDATE users SET logged_in = 1 WHERE email = '" . $row['email'] . "'";
+            mysqli_query($con, $insert_login);
+            $insert_accesari = "UPDATE users SET accesari = accesari+1 WHERE email = '" . $row['email'] . "'";
+            mysqli_query($con, $insert_accesari);
+            $_SESSION['rol'] = $row['rol'];
+             $_SESSION['accesari'] = $row['accesari'];
 
-           // header("Location: ../../../../index.php");
+           header("Location: ../../../views/pagini/profil.php");
 
             // exit();
         } else {
@@ -116,7 +122,13 @@ if (isset($_POST["login"])) {
                 </li>
                 <li><a href="../../../../../views/pagini/newsletter.php">Abonează-te la Newsletter!</a></li>
             </ul>
-            <a href="../../../../../views/pagini/inregistrare.php">
+           <a 
+             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1): ?>
+                href="../../../../../views/pagini/profil.php"
+              <?php else: ?>
+                href="../../../../../views/pagini/inregistrare.php"
+              <?php endif; ?>
+            >
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
         </nav>
         
@@ -136,6 +148,9 @@ if (isset($_POST["login"])) {
           <body>
             <form action="login.php" method="post">
                 <br>
+                <?php if (isset($_SESSION['accesari']) && $_SESSION['accesari'] == 0): ?>
+                <h2>Cont creat cu succes! Va rugam sa va autentificati!</h2>
+                <?php endif; ?>
                 <label for="username">Nume de utilizator:</label>
                 <input type="text" id="username" name="username" required>
                 <br>

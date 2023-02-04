@@ -2,15 +2,15 @@
 require_once('../../resurse/phpmailer/class.phpmailer.php');
 require_once ('../../recaptcha-master/src/autoload.php');
 if (isset($_POST["newsletter"])) {
-    $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
+    $con = mysqli_connect("localhost", "astro_user", "VuEpEARll3ReG", "astro_proiectdaw", "3306");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit();
     }
     if (empty($_POST['g-recaptcha-response'])){
         echo "Te rugam sa rezolvi captcha-ul";
-        exit();
-       }
+     exit();
+   }
       
         
     $select = mysqli_query($con, "SELECT * FROM users WHERE email = '".$_POST['email']."'");
@@ -37,16 +37,16 @@ if (isset($_POST["newsletter"])) {
                 $mail->AddAddress($_POST["email"], $row["username"]);
                 $mail->isHTML(true);
                 $mail->Subject = "Newsletter || ASTRO Productions";
-                $mail->Body = " Vă mulțumim că v-ați abonat la newsletter-ul nostru, '" . $row['username'] . "'! <br><br>
-            Ne bucurăm să vă ținem la curent cu cele mai noi actualizări și noutăți din lumea muzicii.
+                $mail->Body = " Va multumim ca v-ati abonat la newsletter-ul nostru! <br><br>
+            Ne bucuram sa va tinem la curent cu cele mai noi actualizari si noutati din lumea muzicii.
             <br><br>
-            În ultima perioadă, am lansat albume noi de la artiștii noștri de top, iar acestea au primit recenzii excelente din partea criticilor de muzică. De asemenea, am organizat concerte live online, și am anunțat turnee viitoare pentru acești artiști.
+            In ultima perioada, am lansat albume noi de la artistii nostri de top, iar acestea au primit recenzii excelente din partea criticilor de muzica. De asemenea, am organizat concerte live online, si am anuntat turnee viitoare pentru acesti artisti.
             <br>
-            În plus, am lansat un nou program de mentorship pentru tinerii artiști, care le oferă oportunități de a colabora cu artiștii noștri consacrați și de a-și dezvolta abilitățile muzicale.
+            In plus, am lansat un nou program de mentorship pentru tinerii artisti, care le ofera oportunitati de a colabora cu artistii nostri consacrati si de a-si dezvolta abilitatile muzicale.
             <br><br>
-            Nu pierdeți următoarele actualizări și noutăți, asigurați-vă că vă verificați adresa de e-mail și urmăriți-ne pe Instagram la @astro_productions.
+            Nu pierdeti urmatoarele actualizari si noutati, asigurati-va ca va verificati adresa de e-mail si urmariti-ne pe Instagram la @astro_productions.
             <br><br>
-            Vă mulțumim din nou pentru susținerea dvs. continuă,<br>
+            Va multumim din nou pentru sustinerea dvs. continua,<br>
             Alexandru Jilavu,<br>
             Manager ASTRO Productions<br> ";
                 $mail->send();
@@ -54,6 +54,7 @@ if (isset($_POST["newsletter"])) {
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
+            header("Location: ../../../views/pagini/newsletter.php");
         }
     }
     else
@@ -126,7 +127,13 @@ if (isset($_POST["newsletter"])) {
                 </li>
                 <li><a href="../../../../../views/pagini/newsletter.php">Abonează-te la Newsletter!</a></li>
             </ul>
-            <a href="../../../../../views/pagini/inregistrare.php">
+            <a 
+             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1): ?>
+                href="../../../../../views/pagini/profil.php"
+              <?php else: ?>
+                href="../../../../../views/pagini/inregistrare.php"
+              <?php endif; ?>
+            >
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
         </nav>
         
@@ -165,7 +172,7 @@ if (isset($_POST["newsletter"])) {
                 <label for="email">Introduceți mail-ul personal:</label>
                 <input type="email" id="email" name="email" required>
                 <br>
-                <br><br>
+                <br>
                  <div class="g-recaptcha" data-sitekey="6LfqxRkkAAAAABQO7Bn4_crxi0sXPHGFX4lsU_Fy"></div>
                 <br> 
                 <input type="submit" name="newsletter" value="Abonează-mă">
