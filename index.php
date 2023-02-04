@@ -1,5 +1,5 @@
 <?php
-                $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
+                $con = mysqli_connect("localhost", "astro_user", "VuEpEARll3ReG", "astro_proiectdaw", "3306");
 
                 if (mysqli_connect_errno()) {
                   echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -74,11 +74,39 @@
                 </li>
                 <li><a href="../../../../../views/pagini/newsletter.php">Abonează-te la Newsletter!</a></li>
             </ul>
-            <a href="../../../../../views/pagini/inregistrare.php">
+            <a 
+             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1): ?>
+                href="../../../../../views/pagini/profil.php"
+              <?php else: ?>
+                href="../../../../../views/pagini/inregistrare.php"
+              <?php endif; ?>
+            >
                 <img src="../../../../../resurse/imagini/login2.png" class="login-img"></a>
         </nav>
                 <main>
+        <style>
+        .galerie {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(2, 1fr);
+          grid-gap: 10px;
+        }
+        
+        .grid-item {
+          background-size: cover;
+          background-position: center;
+          height: 200px;
+          overflow: hidden;
+        }
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+</style>
         <h1>Bine ati venit la firma noastra de productie muzicala</h1>
+        <div>
             <div class="active-users">
                 <h2>Numarul de utilizatori activi: <?php echo $active_users; ?></h2>
               </div>
@@ -87,7 +115,7 @@
               <h2> Cei mai vechi artisti ai nostri: </h2>
             <div class="top-artists">
             <?php 
-      $con = mysqli_connect("localhost", "root", "", "proiectDAW", "3306");
+      $con = mysqli_connect("localhost", "astro_user", "VuEpEARll3ReG", "astro_proiectdaw", "3306");
       if (mysqli_connect_errno()) {
           echo "Failed to connect to MySQL: " . mysqli_connect_error();
           exit();}
@@ -106,7 +134,7 @@
        </div>
      </div>";
 
-                if ($i == 5)
+                if ($i == 3)
                   break;
       }
           }
@@ -121,7 +149,22 @@
             <div class="description">
               <p>Firma noastra de productie muzicala este dedicata descoperirii si promovarii artistilor talentati. Lucram cu o varietate de genuri muzicale si colaboram cu artisti din intreaga lume pentru a crea muzica de calitate. Va invitam sa navigati pe site-ul nostru pentru a afla mai multe despre artistii si proiectele noastre.</p>
             </div>
-            
+            <div class="galerie">
+  <div class="grid-item">
+    <img src="../../../../../resurse/imagini/bobmarley.jpg" alt="Bob Marley">
+  </div>
+  <div class="grid-item">
+    <img src="../../../../../resurse/imagini/ella.jpg" alt="Ella Fitzgerald">
+  </div>
+  <div class="grid-item">
+    <img src="../../../../../resurse/imagini/michaeljackson.jpg" alt="Michael Jackson">
+  </div>
+  <div class="grid-item">
+    <img src="../../../../../resurse/imagini/beatles.jpg" alt="The Beatles">
+  </div>
+</div>
+
+            </div>
           </main>
           <footer>
             <p>Copyright © 2021 ASTRO Productions</p>
