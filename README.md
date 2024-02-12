@@ -1,4 +1,4 @@
-# Proiect App WEB - Firmă de Producție Muzicală
+# Firmă de Producție Muzicală -- PHP Website
 
 ## Despre Proiect
 
