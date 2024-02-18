@@ -8,7 +8,7 @@ Acest proiect explorează conceptul unei firme de producție muzicală, oferind 
 
 - **Creare Cont:** Utilizatorii pot crea un cont, cu datele lor adăugate în baza de date a site-ului și vor primi un mail de confirmare.
 - **Acces Cont:** După înregistrare, utilizatorii își pot accesa contul personal, unde pot vedea informații ale contului și au opțiunea de delogare.
-- **Abonare la Newsletter:** Utilizatorii înregistrați pot opta pentru abonarea la Newsletter pentru a primi informații actualizate despre muzică.
+- **Abonare la Newsletter:** Utilizatorii înregistrați pot opta pentru abonarea la Newsletter pentru a primi informații actualizate despre muzică și artiști contemporani.
 
 ## Structura Bazei de Date
 
