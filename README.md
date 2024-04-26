@@ -1,3 +1,38 @@
+# Music Production Company -- PHP Website
+
+## About the Project
+
+This project explores the concept of a music production company, offering users an immersive experience through various visual and interactive elements related to music. Features include a top 3 list of the company's "veteran" artists, dedicated artist pages with detailed descriptions, and a distinctive logo.
+
+## User Features
+
+- **Create Account:** Users can create an account, with their details added to the website's database, and will receive a confirmation email.
+- **Account Access:** After registration, users can access their personal account, where they can see account information and have the option to log out.
+- **Newsletter Subscription:** Registered users can opt to subscribe to the Newsletter to receive updated information about music and contemporary artists.
+
+## Database Structure
+
+### `users` Table
+- `idUser`: Primary key, autoincrement, not null
+- `username`: Not null
+- `password`: Not null
+- `email`
+- `newsletter`: BINARY
+- `logged_in`: BINARY
+- `role`: DEFAULT client
+
+### `artisti` Table
+- `idArtist`: Primary key, autoincrement, not null
+- `name`: Not null
+- `music_genre`: Not null
+- `description`
+- `followers`
+
+
+### Romanian Translation Below
+---
+
+
 # Firmă de Producție Muzicală -- PHP Website
 
 ## Despre Proiect
